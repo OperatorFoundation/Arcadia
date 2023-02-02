@@ -1,6 +1,9 @@
-public struct Arcadia {
-    public private(set) var text = "Hello, World!"
+public struct Arcadia
+{
+    let keyspace: Keyspace
 
-    public init() {
+    public init()
+    {
+        self.keyspace = Keyspace()
     }
 }
