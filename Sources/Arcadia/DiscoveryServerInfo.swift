@@ -11,7 +11,7 @@ public class DiscoveryServerInfo
 {
     public let serverID: String
     public let serverAddres: String
-    public let lastHeartbeat: Date
+    public var lastHeartbeat: Date
 
     public init(serverID: String, serverAddres: String)
     {
