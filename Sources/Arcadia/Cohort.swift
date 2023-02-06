@@ -7,17 +7,17 @@
 
 import Foundation
 
-public class Cohort
-{
-    var peers: [Peer]
-
-    public init(peers: [Peer])
-    {
-        self.peers = peers
-    }
-
-    public func count() -> Int
-    {
-        return self.peers.count
-    }
-}
+//public class Cohort
+//{
+//    var peers: [Peer]
+//
+//    public init(peers: [Peer])
+//    {
+//        self.peers = peers
+//    }
+//
+//    public func count() -> Int
+//    {
+//        return self.peers.count
+//    }
+//}

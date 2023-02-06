@@ -19,7 +19,6 @@ let package = Package(
         .package(url: "https://github.com/OperatorFoundation/Datable", branch: "main"),
         .package(url: "https://github.com/OperatorFoundation/Keychain", branch: "main"),
         .package(url: "https://github.com/OperatorFoundation/Nametag", branch: "main"),
-        .package(url: "https://github.com/OperatorFoundation/Sculpture", branch: "main"),
         .package(url: "https://github.com/OperatorFoundation/Transmission", branch: "main"),
     ],
     targets: [
@@ -32,7 +31,6 @@ let package = Package(
                 "Datable",
                 "Keychain",
                 "Nametag",
-                "Sculpture",
                 "Transmission",
             ]
         ),
