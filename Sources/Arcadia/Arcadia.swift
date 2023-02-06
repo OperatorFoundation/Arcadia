@@ -7,7 +7,7 @@ public struct Arcadia
 //        self.keyspace = Keyspace()
     }
 
-    public func findPeers(discoverServers: [DiscoveryServerInfo], serverID: String) -> [DiscoveryServerInfo]
+    public func findPeers(discoveryServers: [DiscoveryServerInfo], serverID: String) -> [DiscoveryServerInfo]
     {
         return discoverServers
     }
