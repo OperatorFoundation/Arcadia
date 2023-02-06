@@ -9,6 +9,6 @@ public struct Arcadia
 
     public func findPeers(discoveryServers: [DiscoveryServerInfo], serverID: String) -> [DiscoveryServerInfo]
     {
-        return discoverServers
+        return discoveryServers
     }
 }
