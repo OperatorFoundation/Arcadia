@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class DiscoveryServerInfo
+public class DiscoveryServerInfo: Codable
 {
     public let serverID: String
     public let serverAddres: String
