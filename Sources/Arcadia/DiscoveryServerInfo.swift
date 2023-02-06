@@ -10,13 +10,13 @@ import Foundation
 public class DiscoveryServerInfo: Codable
 {
     public let serverID: String
-    public let serverAddres: String
+    public let serverAddress: String
     public var lastHeartbeat: Date
 
-    public init(serverID: String, serverAddres: String)
+    public init(serverID: String, serverAddress: String)
     {
         self.serverID = serverID
-        self.serverAddres = serverAddres
+        self.serverAddress = serverAddress
         self.lastHeartbeat = Date()
     }
 }
