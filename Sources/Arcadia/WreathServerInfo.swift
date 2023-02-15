@@ -1,5 +1,5 @@
 //
-//  DiscoveryServerInfo.swift
+//  WreathServerInfo.swift
 //  
 //
 //  Created by Dr. Brandon Wiley on 2/6/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class DiscoveryServerInfo: Codable
+public class WreathServerInfo: Codable
 {
     public let serverID: String
     public let serverAddress: String
