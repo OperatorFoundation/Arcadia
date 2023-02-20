@@ -1,14 +1,33 @@
-public struct Arcadia
+//
+//  Arcadia.swift
+//
+//
+//  Created by Dr. Brandon Wiley on 2/6/23.
+//
+
+public class Arcadia
 {
-//    let keyspace: Keyspace
+    let keyspace: Keyspace
+
+    var servers: [Key: WreathServerInfo] = [:]
 
     public init()
     {
-//        self.keyspace = Keyspace()
+        self.keyspace = Keyspace()
     }
 
-    public func findPeers(wreathServers: [WreathServerInfo], serverID: String) -> [WreathServerInfo]
+    public func findPeers(for server: Key) -> [WreathServerInfo]
     {
-        return wreathServers
+        return [WreathServerInfo](self.servers.values)
+    }
+
+    public func findServers(for client: Key) -> [WreathServerInfo]
+    {
+        return [WreathServerInfo](self.servers.values)
+    }
+
+    public func addServer(wreathServer: WreathServerInfo)
+    {
+        self.servers[wreathServer.key] = wreathServer
     }
 }

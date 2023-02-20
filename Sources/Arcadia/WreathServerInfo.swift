@@ -9,13 +9,13 @@ import Foundation
 
 public class WreathServerInfo: Codable
 {
-    public let serverID: String
+    public let key: Key
     public let serverAddress: String
     public var lastHeartbeat: Date
 
-    public init(serverID: String, serverAddress: String)
+    public init(key: Key, serverAddress: String)
     {
-        self.serverID = serverID
+        self.key = key
         self.serverAddress = serverAddress
         self.lastHeartbeat = Date()
     }

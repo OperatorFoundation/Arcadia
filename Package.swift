@@ -15,10 +15,12 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
+        .package(url: "https://github.com/OperatorFoundation/Abacus", branch: "main"),
         .package(url: "https://github.com/OperatorFoundation/Bits", branch: "main"),
         .package(url: "https://github.com/OperatorFoundation/Datable", branch: "main"),
         .package(url: "https://github.com/OperatorFoundation/Keychain", branch: "main"),
         .package(url: "https://github.com/OperatorFoundation/Nametag", branch: "main"),
+        .package(url: "https://github.com/blanu/Swift-BigInt", branch: "main"),
         .package(url: "https://github.com/OperatorFoundation/Transmission", branch: "main"),
     ],
     targets: [
@@ -27,11 +29,14 @@ let package = Package(
         .target(
             name: "Arcadia",
             dependencies: [
+                "Abacus",
                 "Bits",
                 "Datable",
                 "Keychain",
                 "Nametag",
                 "Transmission",
+
+                .product(name: "BigNumber", package: "swift-BigInt"),
             ]
         ),
         .testTarget(
