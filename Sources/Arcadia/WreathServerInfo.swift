@@ -7,15 +7,17 @@
 
 import Foundation
 
+import Keychain
+
 public class WreathServerInfo: Codable
 {
-    public let key: Key
+    public let publicKey: PublicKey
     public let serverAddress: String
     public var lastHeartbeat: Date
 
-    public init(key: Key, serverAddress: String)
+    public init(publicKey: PublicKey, serverAddress: String)
     {
-        self.key = key
+        self.publicKey = publicKey
         self.serverAddress = serverAddress
         self.lastHeartbeat = Date()
     }

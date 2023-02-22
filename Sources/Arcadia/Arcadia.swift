@@ -26,8 +26,18 @@ public class Arcadia
         return [WreathServerInfo](self.servers.values)
     }
 
-    public func addServer(wreathServer: WreathServerInfo)
+    public func addServer(wreathServer: WreathServerInfo) throws
     {
-        self.servers[wreathServer.key] = wreathServer
+        guard let key = wreathServer.publicKey.arcadiaKey else
+        {
+            throw ArcadiaError.noArcadiaKey
+        }
+
+        self.servers[key] = wreathServer
     }
+}
+
+public enum ArcadiaError: Error
+{
+    case noArcadiaKey
 }
