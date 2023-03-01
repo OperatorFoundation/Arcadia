@@ -11,11 +11,11 @@ import Keychain
 
 extension PublicKey
 {
-    public var arcadiaKey: Key?
+    public var arcadiaKey: ArcadiaID?
     {
         do
         {
-            return try Key(publicKey: self)
+            return try ArcadiaID(publicKey: self)
         }
         catch
         {

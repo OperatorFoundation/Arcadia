@@ -10,20 +10,20 @@ import Foundation
 import BigNumber
 import Keychain
 
-public class Key: Codable, Equatable, Comparable, Hashable
+public class ArcadiaID: Codable, Equatable, Comparable, Hashable
 {
     static let min = BInt(0)
     static let max = BInt(UInt64.max)
     static let leadingOne = BInt(UInt64(9223372036854775808)) // A 64-bit number where the leftmost bit is 1.
 
     // Equatable
-    public static func == (lhs: Key, rhs: Key) -> Bool
+    public static func == (lhs: ArcadiaID, rhs: ArcadiaID) -> Bool
     {
         return lhs.identifier == rhs.identifier
     }
 
     // Comparable
-    public static func < (lhs: Key, rhs: Key) -> Bool
+    public static func < (lhs: ArcadiaID, rhs: ArcadiaID) -> Bool
     {
         return lhs.identifier < rhs.identifier
     }
@@ -59,7 +59,7 @@ public class Key: Codable, Equatable, Comparable, Hashable
         hasher.combine(self.identifier)
     }
 
-    public func increment() -> Key
+    public func increment() -> ArcadiaID
     {
         var nextIdentifier = self.identifier + BInt(1)
         if nextIdentifier > Self.max
@@ -67,10 +67,10 @@ public class Key: Codable, Equatable, Comparable, Hashable
             nextIdentifier = nextIdentifier - Self.max
         }
 
-        return Key(identifier: nextIdentifier)
+        return ArcadiaID(identifier: nextIdentifier)
     }
 
-    public func decrement() -> Key
+    public func decrement() -> ArcadiaID
     {
         var nextIdentifier = self.identifier - BInt(1)
         if nextIdentifier < Self.min
@@ -78,23 +78,23 @@ public class Key: Codable, Equatable, Comparable, Hashable
             nextIdentifier = nextIdentifier + Self.max
         }
 
-        return Key(identifier: nextIdentifier)
+        return ArcadiaID(identifier: nextIdentifier)
     }
 
-    public func shiftLeft() -> (Key, Key)
+    public func shiftLeft() -> (ArcadiaID, ArcadiaID)
     {
         let shifted0 = self.identifier * BInt(2)
         let shifted1 = shifted0 + BInt(1)
 
-        return (Key(identifier: shifted0), Key(identifier: shifted1))
+        return (ArcadiaID(identifier: shifted0), ArcadiaID(identifier: shifted1))
     }
 
-    public func shiftRight() -> (Key, Key)
+    public func shiftRight() -> (ArcadiaID, ArcadiaID)
     {
         let shifted0 = self.identifier / BInt(2)
         let shifted1 = shifted0 + Self.leadingOne
 
-        return (Key(identifier: shifted0), Key(identifier: shifted1))
+        return (ArcadiaID(identifier: shifted0), ArcadiaID(identifier: shifted1))
     }
 }
 

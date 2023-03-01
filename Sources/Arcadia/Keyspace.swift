@@ -12,7 +12,7 @@ import Abacus
 public class Keyspace
 {
     // Private constants
-    let keys: SortedSet<Key> = SortedSet<Key>(sortingStyle: .lowFirst)
+    let keys: SortedSet<ArcadiaID> = SortedSet<ArcadiaID>(sortingStyle: .lowFirst)
 
     // Private variables
     var lock = DispatchSemaphore(value: 1)
@@ -23,7 +23,7 @@ public class Keyspace
     }
 
     // Public functions
-    public func add(key: Key)
+    public func add(key: ArcadiaID)
     {
         defer
         {
@@ -34,7 +34,7 @@ public class Keyspace
         self.keys.add(element: key)
     }
 
-    public func remove(key: Key)
+    public func remove(key: ArcadiaID)
     {
         defer
         {
@@ -45,7 +45,7 @@ public class Keyspace
         self.keys.remove(element: key)
     }
 
-    public func getPeers(for server: Key) throws -> [Key]
+    public func getPeers(for server: ArcadiaID) throws -> [ArcadiaID]
     {
         defer
         {
@@ -53,7 +53,7 @@ public class Keyspace
         }
         self.lock.wait()
 
-        var set: Set<Key> = Set<Key>()
+        var set: Set<ArcadiaID> = Set<ArcadiaID>()
 
         let next = try getNext(for: server)
         let previous = try getPrevious(for: server)
@@ -62,12 +62,12 @@ public class Keyspace
         set.insert(try getNext(for: next))
         set.insert(try getPrevious(for: previous))
 
-        var results: [Key] = []
+        var results: [ArcadiaID] = []
         let _ = set.map { results.append($0) }
         return results
     }
 
-    public func getServers(for client: Key) throws -> [Key]
+    public func getServers(for client: ArcadiaID) throws -> [ArcadiaID]
     {
         defer
         {
@@ -75,20 +75,20 @@ public class Keyspace
         }
         self.lock.wait()
 
-        var set: Set<Key> = Set<Key>()
+        var set: Set<ArcadiaID> = Set<ArcadiaID>()
 
         set.insert(try getNext(for: client))
         set.insert(try getPrevious(for: client))
         let _ = try self.getShiftedLeft(for: client).map { set.insert($0) }
         let _ = try self.getShiftedRight(for: client).map { set.insert($0) }
 
-        var results: [Key] = []
+        var results: [ArcadiaID] = []
         let _ = set.map { results.append($0) }
         return results
     }
 
     // Private functions
-    func getShiftedLeft(for key: Key) throws -> [Key]
+    func getShiftedLeft(for key: ArcadiaID) throws -> [ArcadiaID]
     {
         let (idealAKey, idealBKey) = key.shiftLeft()
         let realAKey = try self.getNext(for: idealAKey)
@@ -97,7 +97,7 @@ public class Keyspace
         return [realAKey, realBKey]
     }
 
-    func getShiftedRight(for key: Key) throws -> [Key]
+    func getShiftedRight(for key: ArcadiaID) throws -> [ArcadiaID]
     {
         let (idealAKey, idealBKey) = key.shiftRight()
         let realAKey = try self.getNext(for: idealAKey)
@@ -106,9 +106,9 @@ public class Keyspace
         return [realAKey, realBKey]
     }
 
-    func getNext(for key: Key) throws -> Key
+    func getNext(for key: ArcadiaID) throws -> ArcadiaID
     {
-        let circle = try CircularArray<Key>(array: self.keys.array)
+        let circle = try CircularArray<ArcadiaID>(array: self.keys.array)
         guard let index = circle.closestGreater(than: key) else
         {
             throw KeyspaceError.keyLookupFailed
@@ -122,9 +122,9 @@ public class Keyspace
         return result
     }
 
-    func getPrevious(for key: Key) throws -> Key
+    func getPrevious(for key: ArcadiaID) throws -> ArcadiaID
     {
-        let circle = try CircularArray<Key>(array: self.keys.array)
+        let circle = try CircularArray<ArcadiaID>(array: self.keys.array)
         guard let index = circle.closestLess(than: key) else
         {
             throw KeyspaceError.keyLookupFailed

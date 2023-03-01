@@ -9,19 +9,19 @@ public class Arcadia
 {
     let keyspace: Keyspace
 
-    var servers: [Key: WreathServerInfo] = [:]
+    var servers: [ArcadiaID: WreathServerInfo] = [:]
 
     public init()
     {
         self.keyspace = Keyspace()
     }
 
-    public func findPeers(for server: Key) -> [WreathServerInfo]
+    public func findPeers(for server: ArcadiaID) -> [WreathServerInfo]
     {
         return [WreathServerInfo](self.servers.values)
     }
 
-    public func findServers(for client: Key) -> [WreathServerInfo]
+    public func findServers(for client: ArcadiaID) -> [WreathServerInfo]
     {
         return [WreathServerInfo](self.servers.values)
     }
