@@ -11,7 +11,7 @@ import Keychain
 
 extension PublicKey
 {
-    public var arcadiaKey: ArcadiaID?
+    public var arcadiaID: ArcadiaID?
     {
         do
         {
