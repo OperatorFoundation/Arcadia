@@ -50,7 +50,7 @@ public class ArcadiaID: Codable, Equatable, Comparable, Hashable
     // Private initializers
     convenience init(data: Data)
     {
-        self.init(identifier: BInt(bytes: data.array))
+        self.init(identifier: BInt(bytes: [UInt8](data)))
     }
 
     // Hashable
