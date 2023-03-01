@@ -28,7 +28,7 @@ public class Arcadia
 
     public func addServer(wreathServer: WreathServerInfo) throws
     {
-        guard let key = wreathServer.publicKey.arcadiaKey else
+        guard let key = wreathServer.publicKey.arcadiaID else
         {
             throw ArcadiaError.noArcadiaKey
         }
