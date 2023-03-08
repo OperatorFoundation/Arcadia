@@ -7,23 +7,48 @@
 
 public class Arcadia
 {
-    let keyspace: Keyspace
+    let keyspace: Keyspace = Keyspace()
 
     var servers: [ArcadiaID: WreathServerInfo] = [:]
 
     public init()
     {
-        self.keyspace = Keyspace()
     }
 
     public func findPeers(for server: ArcadiaID) -> [WreathServerInfo]
     {
-        return [WreathServerInfo](self.servers.values)
+        do
+        {
+            let keys = try self.keyspace.getPeers(for: server)
+            return keys.compactMap
+            {
+                key in
+
+                return self.servers[key]
+            }
+        }
+        catch
+        {
+            return []
+        }
     }
 
     public func findServers(for client: ArcadiaID) -> [WreathServerInfo]
     {
-        return [WreathServerInfo](self.servers.values)
+        do
+        {
+            let keys = try self.keyspace.getServers(for: client)
+            return keys.compactMap
+            {
+                key in
+
+                return self.servers[key]
+            }
+        }
+        catch
+        {
+            return []
+        }
     }
 
     public func addServer(wreathServer: WreathServerInfo) throws
@@ -34,6 +59,13 @@ public class Arcadia
         }
 
         self.servers[key] = wreathServer
+        self.keyspace.add(key: key)
+    }
+
+    public func removeServer(arcadiaID: ArcadiaID) throws
+    {
+        self.servers.removeValue(forKey: arcadiaID)
+        self.keyspace.remove(key: arcadiaID)
     }
 }
 
