@@ -62,10 +62,15 @@ public class Arcadia
         self.keyspace.add(key: key)
     }
 
-    public func removeServer(arcadiaID: ArcadiaID) throws
+    public func removeServer(wreathServer: WreathServerInfo) throws
     {
-        self.servers.removeValue(forKey: arcadiaID)
-        self.keyspace.remove(key: arcadiaID)
+        guard let key = wreathServer.publicKey.arcadiaID else
+        {
+            throw ArcadiaError.noArcadiaKey
+        }
+
+        self.servers.removeValue(forKey: key)
+        self.keyspace.remove(key: key)
     }
 }
 
