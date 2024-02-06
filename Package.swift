@@ -15,13 +15,13 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(url: "https://github.com/OperatorFoundation/Abacus", branch: "main"),
-        .package(url: "https://github.com/OperatorFoundation/Bits", branch: "main"),
-        .package(url: "https://github.com/OperatorFoundation/Datable", branch: "main"),
-        .package(url: "https://github.com/OperatorFoundation/Keychain", branch: "main"),
-        .package(url: "https://github.com/OperatorFoundation/Nametag", branch: "main"),
-        .package(url: "https://github.com/blanu/Swift-BigInt", branch: "main"),
-        .package(url: "https://github.com/OperatorFoundation/Transmission", branch: "main"),
+        .package(url: "https://github.com/OperatorFoundation/Abacus", branch: "release"),
+        .package(url: "https://github.com/OperatorFoundation/Bits", branch: "release"),
+        .package(url: "https://github.com/OperatorFoundation/Datable", branch: "4.0.0"),
+        .package(url: "https://github.com/OperatorFoundation/Keychain", branch: "release"),
+        .package(url: "https://github.com/OperatorFoundation/Nametag", branch: "release"),
+        .package(url: "https://github.com/OperatorFoundation/Swift-BigInt", branch: "release"),
+        .package(url: "https://github.com/OperatorFoundation/Transmission", branch: "release"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
