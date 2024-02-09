@@ -10,6 +10,7 @@ import Foundation
 import BigNumber
 import Keychain
 
+// An ArcadiaID is a P256 elliptic curve represented as a single BigInteger
 public class ArcadiaID: Codable, Equatable, Comparable, Hashable
 {
     static let min = BInt(0)

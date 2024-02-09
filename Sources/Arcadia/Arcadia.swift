@@ -2,59 +2,26 @@
 //  Arcadia.swift
 //
 //
-//  Created by Dr. Brandon Wiley on 2/6/23.
+//  Created by Dr. Brandon Wiley on 2/9/24.
 //
 
 import Foundation
 
-import Datable
-
+// Base Arcadia class, implementing the Arcadia algorithm and associated data structures
 public class Arcadia
 {
+    // The Arcadia keyspace is the core data structure for the Arcadia algorithm.
     let keyspace: Keyspace = Keyspace()
 
+    // As the keyspace just stores the ArcadiaID, the servers field lets us recover the full server information from the id.
     var servers: [ArcadiaID: WreathServerInfo] = [:]
 
+    // In Swift, all classes need an initializer.
     public init()
     {
     }
 
-    public func findPeers(for server: ArcadiaID) -> [WreathServerInfo]
-    {
-        do
-        {
-            let keys = try self.keyspace.getPeers(for: server)
-            return keys.compactMap
-            {
-                key in
-
-                return self.servers[key]
-            }
-        }
-        catch
-        {
-            return []
-        }
-    }
-
-    public func findServers(for client: ArcadiaID) -> [WreathServerInfo]
-    {
-        do
-        {
-            let keys = try self.keyspace.getServers(for: client)
-            return keys.compactMap
-            {
-                key in
-
-                return self.servers[key]
-            }
-        }
-        catch
-        {
-            return []
-        }
-    }
-
+    // Add a server to the servers list and to the Arcadia keyspace.
     public func addServer(wreathServer: WreathServerInfo) throws
     {
         guard let key = wreathServer.publicKey.arcadiaID else
@@ -66,6 +33,7 @@ public class Arcadia
         self.keyspace.add(key: key)
     }
 
+    // Remove a server from the servers list and from the Arcadia keyspace.
     public func removeServer(wreathServer: WreathServerInfo) throws
     {
         guard let key = wreathServer.publicKey.arcadiaID else
