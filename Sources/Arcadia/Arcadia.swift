@@ -5,6 +5,10 @@
 //  Created by Dr. Brandon Wiley on 2/6/23.
 //
 
+import Foundation
+
+import Datable
+
 public class Arcadia
 {
     let keyspace: Keyspace = Keyspace()
@@ -71,6 +75,16 @@ public class Arcadia
 
         self.servers.removeValue(forKey: key)
         self.keyspace.remove(key: key)
+    }
+}
+
+extension Arcadia: CustomStringConvertible
+{
+    public var description: String
+    {
+        return """
+        Arcadia[\(self.servers.map { "\($0.key): \($0.value)" }.joined(separator: ", "))]
+        """
     }
 }
 
