@@ -15,7 +15,7 @@ public class ArcadiaID: Codable, Equatable, Comparable, Hashable
 {
     static let min = BInt(0)
     static let max = BInt(UInt64.max)
-    static let leadingOne = BInt(UInt64(9223372036854775808)) // A 64-bit number where the leftmost bit is 1.
+    static let leadingOne = BInt(UInt(9223372036854775808)) // A 64-bit number where the leftmost bit is 1.
 
     // Equatable
     public static func == (lhs: ArcadiaID, rhs: ArcadiaID) -> Bool
