@@ -162,7 +162,7 @@ public class Keyspace
 
         for reverseIndex in 0..<array.count
         {
-            let index = array.count - reverseIndex
+            let index = (array.count - 1) - reverseIndex
 
             if key == array[index]
             {
