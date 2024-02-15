@@ -114,6 +114,59 @@ final class ArcadiaTests: XCTestCase
         }
     }
     
+    func testKeyspaceGetPeers() throws
+    {
+        let keyspace = Keyspace()
+        let arcadiaIDa = try generateID()
+        let arcadiaIDb = try generateID()
+        let arcadiaIDc = try generateID()
+        let arcadiaIDd = try generateID()
+        let arcadiaIDClient = try generateID()
+        
+        keyspace.add(key: arcadiaIDa)
+        keyspace.add(key: arcadiaIDb)
+        keyspace.add(key: arcadiaIDc)
+        keyspace.add(key: arcadiaIDd)
+                        
+        let peers = try keyspace.getPeers(for: arcadiaIDClient)
+        XCTAssert(peers.count > 0)
+        
+        print("Found \(peers.count) peers for \(arcadiaIDClient.identifier):")
+        
+        for peer in peers {
+            print("\(peer.identifier)")
+        }
+    }
+    
+    func testArcadiaForWreathServersFindPeers() throws
+    {
+        let arcadia = ArcadiaForWreathServers()
+
+        let publicKeyA = try PrivateKey(type: .P256Signing).publicKey
+        let serverA = WreathServerInfo(publicKey: publicKeyA, serverAddress: "127.0.0.1:1111")
+        let publicKeyB = try PrivateKey(type: .P256Signing).publicKey
+        let serverB = WreathServerInfo(publicKey: publicKeyB, serverAddress: "127.0.0.1:2222")
+        let publicKeyC = try PrivateKey(type: .P256Signing).publicKey
+        let serverC = WreathServerInfo(publicKey: publicKeyC, serverAddress: "127.0.0.1:3333")
+        let publicKeyD = try PrivateKey(type: .P256Signing).publicKey
+        let serverD = WreathServerInfo(publicKey: publicKeyD, serverAddress: "127.0.0.1:4444")
+        let arcadiaIDClient = try generateID()
+        
+        try arcadia.addServer(wreathServer: serverA)
+        try arcadia.addServer(wreathServer: serverB)
+        try arcadia.addServer(wreathServer: serverC)
+        try arcadia.addServer(wreathServer: serverD)
+                        
+        let peers = arcadia.findPeers(for: arcadiaIDClient)
+        XCTAssert(peers.count > 0)
+        
+        print("Found \(peers.count) peers for \(arcadiaIDClient.identifier):")
+        
+        for peer in peers {
+            print("\(peer.serverAddress)")
+        }
+    }
+    
     // TODO: Initializing ArcadiaID.leadingOne with a UInt instead of a UInt64 because this follows a code path that leads to public init(_ n: UInt){ self.init(limbs: [Limb(n)]) }
     func testBigIntFromUInt()
     {
