@@ -102,8 +102,15 @@ public class Keyspace
         let (idealAKey, idealBKey) = key.shiftLeft()
         let realAKey = try self.getNext(for: idealAKey)
         let realBKey = try self.getNext(for: idealBKey)
-
-        return [realAKey, realBKey]
+        
+        if realAKey == realBKey
+        {
+            return [realAKey]
+        }
+        else
+        {
+            return [realAKey, realBKey]
+        }
     }
 
     // Find all of the IDs which are a right shift away from the given ID
@@ -112,8 +119,15 @@ public class Keyspace
         let (idealAKey, idealBKey) = key.shiftRight()
         let realAKey = try self.getNext(for: idealAKey)
         let realBKey = try self.getNext(for: idealBKey)
-
-        return [realAKey, realBKey]
+        
+        if realAKey == realBKey
+        {
+            return [realAKey]
+        }
+        else
+        {
+            return [realAKey, realBKey]
+        }
     }
 
     // Find the ID that is right-adjacent to the given ID

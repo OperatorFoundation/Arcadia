@@ -70,41 +70,42 @@ final class ArcadiaTests: XCTestCase
         print("Previous to \(arcadiaIDc.identifier) is \(previousToC.identifier)")
     }
     
-    // TODO: Shifted left and shifted right return the same two results and the same results as each other
     func testKeyspaceGetShifted() throws
     {
         let keyspace = Keyspace()
-        let arcadiaIDa = try generateID()
-        let arcadiaIDb = try generateID()
-        let arcadiaIDc = try generateID()
-        let arcadiaIDd = try generateID()
+        
+        for _ in 0..<128
+        {
+            let arcadiaID = try generateID()
+            keyspace.add(key: arcadiaID)
+        }
+
         let arcadiaIDClient = try generateID()
-        
-        keyspace.add(key: arcadiaIDa)
-        keyspace.add(key: arcadiaIDb)
-        keyspace.add(key: arcadiaIDc)
-        keyspace.add(key: arcadiaIDd)
-                
         let leftShifted = try keyspace.getShiftedLeft(for: arcadiaIDClient)
-        print("Shifted left for \(arcadiaIDClient.identifier) is \(leftShifted[0].identifier), \(leftShifted[1].identifier)")
+        print("Left shifted for \(arcadiaIDClient.identifier):")
+        for left in leftShifted
+        {
+            print(left.identifier)
+        }
         
-        let rightShifted = try keyspace.getShiftedLeft(for: arcadiaIDClient)
-        print("Shifted right for \(arcadiaIDClient.identifier) is \(rightShifted[0].identifier), \(rightShifted[1].identifier)")
+        let rightShifted = try keyspace.getShiftedRight(for: arcadiaIDClient)
+        print("Right shifted for \(arcadiaIDClient.identifier):")
+        for right in rightShifted
+        {
+            print(right.identifier)
+        }
     }
     
     func testKeyspaceGetServers() throws
     {
         let keyspace = Keyspace()
-        let arcadiaIDa = try generateID()
-        let arcadiaIDb = try generateID()
-        let arcadiaIDc = try generateID()
-        let arcadiaIDd = try generateID()
         let arcadiaIDClient = try generateID()
         
-        keyspace.add(key: arcadiaIDa)
-        keyspace.add(key: arcadiaIDb)
-        keyspace.add(key: arcadiaIDc)
-        keyspace.add(key: arcadiaIDd)
+        for _ in 0..<128
+        {
+            let arcadiaID = try generateID()
+            keyspace.add(key: arcadiaID)
+        }
                         
         let servers = try keyspace.getServers(for: arcadiaIDClient)
         print("Found \(servers.count) server for \(arcadiaIDClient.identifier):")
@@ -166,25 +167,10 @@ final class ArcadiaTests: XCTestCase
             print("\(peer.serverAddress)")
         }
     }
-    
-    // TODO: Initializing ArcadiaID.leadingOne with a UInt instead of a UInt64 because this follows a code path that leads to public init(_ n: UInt){ self.init(limbs: [Limb(n)]) }
+
     func testBigIntFromUInt()
     {
-        let leadingOneUInt = UInt(9223372036854775808)
-        let leadingOneBigInt = BInt(leadingOneUInt)
-        
-        print("Leading One as BigInt = \(leadingOneBigInt)")
-    }
-    
-    
-    // TODO: This follows a code path in the BInt Library that eventually leads to this init: self.init(Int(source)) which fails because this number is too large for an Int by 1
-    func testBigIntFromUInt64()
-    {
-        let leadingOneUInt64 = UInt64(9223372036854775808)
-        print("leadingOneUInt64 = \(leadingOneUInt64)")
-        print("Int max = \(Int.max)")
-        print("leading one is \(leadingOneUInt64 - UInt64(Int.max)) bigger than Int.max")
-        let leadingOneBigInt = BInt(leadingOneUInt64)
+        let leadingOneBigInt = ArcadiaID.leadingOne
         
         print("Leading One as BigInt = \(leadingOneBigInt)")
     }
