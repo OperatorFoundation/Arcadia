@@ -10,11 +10,13 @@ import Foundation
 import BigNumber
 import Keychain
 
+// An ArcadiaID is a P256 elliptic curve represented as a single BigInteger
 public class ArcadiaID: Codable, Equatable, Comparable, Hashable
 {
     static let min = BInt(0)
     static let max = BInt(UInt64.max)
-    static let leadingOne = BInt(UInt64(9223372036854775808)) // A 64-bit number where the leftmost bit is 1.
+    private static let leadingOneUint64: UInt64 = 9223372036854775808
+    static let leadingOne = BInt(leadingOneUint64) // A 64-bit number where the leftmost bit is 1.
 
     // Equatable
     public static func == (lhs: ArcadiaID, rhs: ArcadiaID) -> Bool
