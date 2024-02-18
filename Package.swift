@@ -15,13 +15,13 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(url: "https://github.com/OperatorFoundation/Abacus", branch: "release"),
-        .package(url: "https://github.com/OperatorFoundation/Bits", branch: "release"),
-        .package(url: "https://github.com/OperatorFoundation/Datable", branch: "4.0.0"),
-        .package(url: "https://github.com/OperatorFoundation/Keychain", branch: "release"),
-        .package(url: "https://github.com/OperatorFoundation/Nametag", branch: "0.1.1"),
-        .package(url: "https://github.com/OperatorFoundation/Swift-BigInt", branch: "release"),
-        .package(url: "https://github.com/OperatorFoundation/Transmission", branch: "release"),
+        .package(url: "https://github.com/OperatorFoundation/Abacus", from: "1.0.3"),
+        .package(url: "https://github.com/OperatorFoundation/Bits", from: "2.0.4"),
+        .package(url: "https://github.com/OperatorFoundation/Datable", from: "4.0.1"),
+        .package(url: "https://github.com/OperatorFoundation/Keychain", from: "1.0.2"),
+        .package(url: "https://github.com/OperatorFoundation/Nametag", from: "0.1.2"),
+        .package(url: "https://github.com/OperatorFoundation/Swift-BigInt", from: "1.0.0"),
+        .package(url: "https://github.com/OperatorFoundation/Transmission", from: "1.2.11"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
