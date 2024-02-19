@@ -20,7 +20,7 @@ let package = Package(
         .package(url: "https://github.com/OperatorFoundation/Datable", from: "4.0.1"),
         .package(url: "https://github.com/OperatorFoundation/Keychain", from: "1.0.2"),
         .package(url: "https://github.com/OperatorFoundation/Nametag", from: "0.1.2"),
-        .package(url: "https://github.com/OperatorFoundation/Swift-BigInt", from: "1.0.0"),
+        .package(url: "https://github.com/OperatorFoundation/Swift-BigInt", from: "1.0.1"),
         .package(url: "https://github.com/OperatorFoundation/Transmission", from: "1.2.11"),
     ],
     targets: [
